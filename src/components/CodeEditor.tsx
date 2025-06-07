@@ -2,7 +2,13 @@
 import MonacoEditor from "@monaco-editor/react";
 import { useState } from "react";
 
-export default function CodeEditor({ starterCode, language, onRun }: { starterCode: string; language: string; onRun?: (code: string) => void }) {
+type CodeEditorProps = {
+  starterCode?: string;
+  language: string;
+  onRun?: (code: string) => void;
+};
+
+export default function CodeEditor({ starterCode, language, onRun }: CodeEditorProps) {
   const [code, setCode] = useState(starterCode || "");
 
   return (

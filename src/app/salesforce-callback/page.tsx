@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+"use client";
+import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function SalesforceCallback() {
+function SalesforceCallbackInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Parse access_token from URL fragment
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
       const accessToken = params.get("access_token");
@@ -16,7 +16,6 @@ export default function SalesforceCallback() {
       if (accessToken && instanceUrl) {
         localStorage.setItem("sf_access_token", accessToken);
         localStorage.setItem("sf_instance_url", instanceUrl);
-        // Redirect to the original page if present, else home
         if (state) {
           router.replace(state);
         } else {
@@ -27,4 +26,12 @@ export default function SalesforceCallback() {
   }, [router, searchParams]);
 
   return <div className="p-8 text-blue-700 font-bold">Connecting to Salesforce...</div>;
+}
+
+export default function SalesforceCallback() {
+  return (
+    <Suspense>
+      <SalesforceCallbackInner />
+    </Suspense>
+  );
 }

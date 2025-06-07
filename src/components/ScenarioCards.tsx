@@ -1,5 +1,9 @@
 import React from "react";
 
+type ScenarioCardsProps = {
+  onLevelClick: (category: string, level: string) => void;
+};
+
 const levels = ["Beginner", "Intermediate", "Master"];
 const categories = [
   { key: "apex_scenarios", label: "Apex Scenarios" },
@@ -7,7 +11,7 @@ const categories = [
   { key: "integration_scenarios", label: "Integration Scenarios" },
 ];
 
-export default function ScenarioCards({ onLevelClick }: { onLevelClick: (category: string, level: string) => void }) {
+export default function ScenarioCards({ onLevelClick }: ScenarioCardsProps) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
       {categories.map((cat) => (
