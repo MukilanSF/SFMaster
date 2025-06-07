@@ -17,7 +17,21 @@
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.4",
     "tailwindcss": "^4.1.8",
-    "typescript": "5.8.3",
-    "vite": "^6.3.5"
-  }
+    "typescript": "5.8.3"
+  },
+  "name": "sfmaster",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MukilanSF/sfmaster.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MukilanSF/sfmaster/issues"
+  },
+  "homepage": "https://github.com/MukilanSF/sfmaster#readme",
+  "description": ""
 }
