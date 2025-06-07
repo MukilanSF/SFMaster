@@ -39,3 +39,12 @@ export default function ScenarioCards({ onLevelClick }: ScenarioCardsProps) {
     </div>
   );
 }
+
+// Usage example
+// function App() {
+//   const handleLevelClick = (category: string, level: string) => {
+//     console.log(`Category: ${category}, Level: ${level}`);
+//   };
+
+//   return <ScenarioCards onLevelClick={handleLevelClick} />;
+// }

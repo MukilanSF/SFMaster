@@ -87,8 +87,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50">
-        <Header onLogin={handleSalesforceLogin} />
+      <Header onLogin={handleSalesforceLogin} />
+      <main className="min-h-[calc(100vh-120px)] bg-gray-50 pb-24">
         <div className="max-w-5xl mx-auto mt-8 p-4">
           <h2 className="text-2xl font-bold mb-6 text-blue-700">Welcome, Salesforce Developer!</h2>
           <p className="mb-8 text-gray-700">
@@ -119,42 +119,42 @@ export default function Home() {
               </ul>
               {selectedQuestion && (
                 <div className="mt-8">
-                  <h3 className="text-xl font-bold mb-2">{selectedQuestion.title}</h3>
-                  <div className="mb-2 text-sm font-semibold text-blue-700">{selectedQuestion.level}</div>
-                  <p className="mb-4 text-gray-700 whitespace-pre-line">{selectedQuestion.description}</p>
-                  <div className="mb-4">
-                    <span className="font-semibold">Hints:</span>
-                    <ul className="list-disc ml-6 text-gray-600">
-                      {Array.isArray(selectedQuestion.hints)
-                        ? selectedQuestion.hints.map((hint, i) => (
-                            <li key={i}>{hint}</li>
-                          ))
-                        : selectedQuestion.hints
-                        ? <li>{selectedQuestion.hints}</li>
-                        : <li className="text-gray-400">No hints available.</li>}
-                    </ul>
-                  </div>
-                  <div className="my-6">
-                    <CodeEditor
-                      starterCode={selectedQuestion.starter_code}
-                      language={selected?.category.startsWith("apex") ? "apex" : "javascript"}
-                      onRun={handleRun}
-                    />
-                    {runResult && (
-                      <div className="mt-4 p-4 bg-gray-900 text-green-300 rounded shadow font-mono whitespace-pre-wrap">
-                        {runResult}
-                      </div>
-                    )}
+                  <div className="bg-white rounded-lg shadow-lg p-6">
+                    <h3 className="text-xl font-bold mb-2">{selectedQuestion.title}</h3>
+                    <div className="mb-2 text-sm font-semibold text-blue-700">{selectedQuestion.level}</div>
+                    <p className="mb-4 text-gray-700 whitespace-pre-line">{selectedQuestion.description}</p>
+                    <div className="mb-4">
+                      <span className="font-semibold">Hints:</span>
+                      <ul className="list-disc ml-6 text-gray-600">
+                        {Array.isArray(selectedQuestion.hints)
+                          ? selectedQuestion.hints.map((hint, i) => (
+                              <li key={i}>{hint}</li>
+                            ))
+                          : selectedQuestion.hints
+                          ? <li>{selectedQuestion.hints}</li>
+                          : <li className="text-gray-400">No hints available.</li>}
+                      </ul>
+                    </div>
+                    <div className="my-6">
+                      <CodeEditor
+                        starterCode={selectedQuestion.starter_code}
+                        language={selected?.category.startsWith("apex") ? "apex" : "javascript"}
+                        onRun={handleRun}
+                      />
+                      {runResult && (
+                        <div className="mt-4 p-4 bg-gray-900 text-green-300 rounded shadow font-mono whitespace-pre-wrap">
+                          {runResult}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
             </div>
           )}
         </div>
-      </div>
-
-      {/* Footer with Contact Us link */}
-      <footer className="w-full fixed bottom-0 left-0 flex justify-center items-center py-4 bg-transparent">
+      </main>
+      <footer className="w-full fixed bottom-0 left-0 flex justify-center items-center py-4 bg-white border-t z-50">
         <a
           href="mailto:developermukilan@gmail.com"
           className="text-blue-600 hover:underline"

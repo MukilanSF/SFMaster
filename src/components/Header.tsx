@@ -58,21 +58,49 @@ const quotes = [
 
 export default function Header({ onLogin }: HeaderProps) {
   const [quote, setQuote] = useState<string>("");
+  const [sfUsername, setSfUsername] = useState<string | null>(null);
 
   useEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+    // Check for Salesforce username in localStorage
+    if (typeof window !== "undefined") {
+      const username = localStorage.getItem("sf_username");
+      setSfUsername(username);
+    }
   }, []);
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("sf_access_token");
+      localStorage.removeItem("sf_instance_url");
+      localStorage.removeItem("sf_username");
+      setSfUsername(null);
+      window.location.reload();
+    }
+  };
 
   return (
     <header className="flex flex-col items-center justify-between p-4 border-b bg-white shadow-sm">
       <div className="w-full flex justify-between items-center">
         <h1 className="text-2xl font-bold text-blue-700">SFMaster</h1>
-        <button
-          onClick={onLogin}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
-        >
-          Login to Salesforce
-        </button>
+        {sfUsername ? (
+          <span className="flex items-center gap-2 text-green-700 font-semibold">
+            Login Successful: {sfUsername}
+            <button
+              onClick={handleLogout}
+              className="ml-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs"
+            >
+              Logout
+            </button>
+          </span>
+        ) : (
+          <button
+            onClick={onLogin}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
+          >
+            Login to Salesforce
+          </button>
+        )}
       </div>
       <div className="mt-2 text-center text-sm text-gray-600 italic min-h-[24px]">
         {quote}
